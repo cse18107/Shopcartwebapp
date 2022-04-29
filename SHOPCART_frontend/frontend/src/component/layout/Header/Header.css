@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============= Utility Component ================ */
+:root {
+  /* font-size: 62.5%; */
+
+  /*====== Custom Properties =======*/
+  font-family: 'Roboto', sans-serif;
+  /* Colors */
+  /* --color-primary: #730039; */
+  --color-primary-m-light: hsla(330, 100%, 23%, 0.55);
+  --color-primary-m-dark: hsla(330, 100%, 23%, 0.85);
+
+  --color-primary-m-light: hsla(0, 0%, 17%, 0.55);
+  /* --color-primary-m-dark: hsla(330, 100%, 23%, 0.85); */
+
+  --color-secondary: #ffc513;
+  --color-secondary-m-light: hsla(45, 100%, 54%, 0.55);
+  --color-secondary-m-dark: rgba(255, 196, 19, 0.85);
+  --color-secondary-m-dark: rgba(36, 36, 36, 0.85);
+
+  --color-tertiary: #ff724c; 
+  --color-tertiary-m-light: hsla(13, 100%, 65%, 0.55);
+ --color-tertiary-m-dark: rgba(255, 115, 76, 0.85);
+
+  --color-quaternary: #f6eedf;
+  --color-tertiary-m-light: hsla(39, 56%, 92%, 0.55);
+  --color-tertiary-m-dark: hsla(39, 56%, 92%, 0.85);
+
+  /* Transition */
+  --transition-duration: 0.3s;
+
+  /* Section title font size */
+  --font-size-title: calc(2rem + 2vw);
+
+  /* Section Padding */
+  --padding-section: 8vh 3vw;
+}
+
+/* List Items */
+li {
+  list-style: none;
+  margin-bottom: 4rem;
+}
+
+a:link,
+a:visited {
+  color: var(--color-quaternary);
+  text-decoration: none;
+  font-size: calc(0.5rem + 1vw);
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  position: relative;
+  transition: all var(--transition-duration) cubic-bezier(1, 0, 0, 1);
+  z-index: 1;
+}
+
+.speedDial {
+  position: fixed;
+  right: 3vmax;
+  top: 3vmax;
+}
+
+.speedDialIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
+
+.header__main-nav {
+  font-size: 62.5%;
+ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.header__main-nav input[type="checkbox"] {
+  font-size: 62.5%;
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  height: 5rem;
+  width: 5rem;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Hamburger */
+.header__main-nav--hamburger {
+  font-size: 62.5%;
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  height: 5rem;
+  width: 5rem;
+  padding: 1rem;
+  background-color: var(--color-secondary);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  animation: main-nav 2s;
+}
+
+@keyframes main-nav {
+  0% {
+    transform: translateX(150rem) rotate(1800deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* Hamburger Lines */
+.header__main-nav--hamburger > div {
+  position: relative;
+  height: 0.3rem;
+  width: 100%;
+  background-color: var(--color-quaternary);
+  display: grid;
+  place-items: center;
+  transition: all var(--transition-duration) ease-in-out;
+}
+
+/* hamburger Top and Bottom Lines */
+.header__main-nav--hamburger > div::before,
+.header__main-nav--hamburger > div::after {
+  content: "";
+  position: absolute;
+  top: -1rem;
+  width: 60%;
+  height: inherit;
+  background-color: inherit;
+  z-index: 2;
+}
+
+.header__main-nav--hamburger > div::before {
+  left: 0;
+}
+
+.header__main-nav--hamburger > div::after {
+  top: 1rem;
+  right: 0;
+}
+
+/* Rotating the menu */
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div {
+  transform: rotate(405deg);
+}
+
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div::before {
+  left: 0;
+  top: 0;
+  width: 100%;
+  transform: rotate(270deg);
+}
+
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div::after {
+  opacity: 0;
+}
+
+.header__main-nav
+  input[type="checkbox"]:checked:hover
+  + .header__main-nav--hamburger
+  > div {
+  transform: rotate(1215deg);
+}
+
+/* Links Menu */
+.header__main-nav--menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.header__main-nav--menu > div {
+  background-color: var(--color-secondary-m-dark);
+  height: 200%;
+  width: 200%;
+
+  display: grid;
+  place-items: center;
+
+  transform: scaleX(0);
+  transition: all var(--transition-duration) ease-in-out;
+}
+
+.header__main-nav--menu > div > div {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vw;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Displaying the menu when the checkbox is checked */
+.header__main-nav input[type="checkbox"]:checked ~ .header__main-nav--menu {
+  visibility: visible;
+}
+
+.header__main-nav
+  input[type="checkbox"]:checked
+  ~ .header__main-nav--menu
+  > div {
+  transform: scaleX(1);
+  transition-duration: 0.5s;
+}
+
+.header__main-nav
+  input[type="checkbox"]:checked
+  ~ .header__main-nav--menu
+  > div
+  > div {
+  opacity: 1;
+}
+
+.header__main-nav--menu ul li a:link,
+.header__main-nav--menu ul li a:visited {
+    z-index: 5;
+    font-size: calc(1.5rem + 0.5vw);
+}
+
+.header__main-nav--menu ul li a:link::before,
+.header__main-nav--menu ul li a:visited::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transform: scaleY(0);
+    background-color: var(--color-primary-m-dark);
+    transition: transform var(--transition-duration) ease-in-out;
+}
+
+.header__main-nav--menu ul li a:hover::before,
+.header__main-nav--menu ul li a:active::before {
+  transform: scaleY(1);
+}
